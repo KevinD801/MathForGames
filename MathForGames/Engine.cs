@@ -15,13 +15,12 @@ namespace MathForGames
         /// </summary>
         private void Run()
         {
-            // Call start forthe entire application
+            // Call start for the entire application
             Start();
 
             // Loop until the application is told to close
             while (!_applicationShouldClose)
             {
-                
                 Update();
                 Draw();
             }
