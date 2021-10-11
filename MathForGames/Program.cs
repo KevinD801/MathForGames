@@ -6,7 +6,8 @@ namespace MathForGames
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Engine engine = new Engine();
+            engine.Run();
         }
     }
 }

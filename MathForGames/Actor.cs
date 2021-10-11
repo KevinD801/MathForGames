@@ -5,11 +5,29 @@ using MathLibrary;
 
 namespace MathForGames
 {
+    struct Icon
+    {
+        public char Symbol;
+        public ConsoleColor Color;
+    }
+
     class Actor
     {
-        private char _icon;
+        private Icon _icon;
         private string _name;
         private Vector2 _position;
+        private bool _started;
+
+        /// <summary>
+        /// True if the start function has been called for this actor
+        /// </summary>
+        public bool Started
+        {
+            get
+            {
+                return _started;
+            }
+        }
 
         public Vector2 Position
         {
@@ -23,16 +41,23 @@ namespace MathForGames
             }
         }
 
-        public Actor(char icon, Vector2 position, string name = "Actor")
+        public Actor(char icon, float x, float y, string name = "Actor", ConsoleColor color = ConsoleColor.White) : 
+            this(icon, new Vector2 {X = x, Y= y}, name, color)
         {
-            _icon = icon;
+            
+        }
+
+
+        public Actor(char icon, Vector2 position, string name = "Actor", ConsoleColor color = ConsoleColor.White)
+        {
+            _icon = new Icon { Symbol = icon, Color = color };
             _position = position;
             _name = name;
         }
 
         public virtual void Start()
         {
-
+            _started = true;
         }
 
         public virtual void Update()
@@ -42,8 +67,7 @@ namespace MathForGames
 
         public virtual void Draw()
         {
-            Console.SetCursorPosition((int)Position.X, (int)Position.Y);
-            Console.Write(_icon);
+            Engine.Render(_icon, Position);
         }
 
         public void End()

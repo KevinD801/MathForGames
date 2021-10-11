@@ -2,7 +2,11 @@
 
 namespace MathLibrary
 {
-    public class Class1
+    public struct Vector2
     {
+        public float X;
+        public float Y;
+
+
     }
 }
