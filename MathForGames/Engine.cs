@@ -26,6 +26,7 @@ namespace MathForGames
             {
                 Update();
                 Draw();
+
                 Thread.Sleep(150);
             }
 
@@ -60,6 +61,11 @@ namespace MathForGames
         private void Update()
         {
             _scenes[_currentSceneIndex].Update();
+
+            while (Console.KeyAvailable)
+            {
+                Console.ReadKey(true);
+            }
         }
 
         /// <summary>
@@ -159,7 +165,7 @@ namespace MathForGames
         /// <returns>False if the position is outside the bounds of the buffer</returns>
         public static bool Render(Icon icon, Vector2 position)
         {
-            // If the position is out of bounds
+            // If the position is out of bounds...
             if (position.X < 0 || position.X > _buffer.GetLength(0) || position.Y < 0 || position.Y >= _buffer.GetLength(1))
             {
                 // ...return false
@@ -170,6 +176,14 @@ namespace MathForGames
             _buffer[(int)position.X, (int)position.Y] = icon;
             return true;
 
+        }
+
+        /// <summary>
+        /// Ends the application
+        /// </summary>
+        public static void CloseApplication()
+        {
+            _applicationShouldClose = true;
         }
     }
 }

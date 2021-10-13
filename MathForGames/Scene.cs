@@ -28,7 +28,7 @@ namespace MathForGames
         }
 
         /// <summary>
-        /// Calls update for every actor in the scene
+        /// Calls update for every actor in the scene.
         /// Calls start for the actor if it hasn't already been called.
         /// </summary>
         public virtual void Update()
@@ -41,6 +41,15 @@ namespace MathForGames
                 }
 
                 _actors[i].Update();
+
+                // Check for collision
+                for (int j = 0; j < _actors.Length; j++)
+                {
+                    if(_actors[i].Position == _actors[j].Position && j != i)
+                    {
+                        _actors[i].OnCollision(_actors[j]);
+                    }
+                }
             }
         }
 
@@ -67,9 +76,9 @@ namespace MathForGames
         }
 
         /// <summary>
-        /// Adds an actor 
+        /// Adds an actor to the scenes list of actors.
         /// </summary>
-        /// <param name="actor"></param>
+        /// <param name="actor">The actor to add to the scene</param>
         public virtual void AddActor(Actor actor)
         {
             // Create a temp array larger than the original
@@ -91,8 +100,8 @@ namespace MathForGames
         /// <summary>
         /// Removes the actor from the scene
         /// </summary>
-        /// <param name="actor">False if the actor was not in the scene array</param>
-        /// <returns></returns>
+        /// <param name="actor">The actor to remove</param>
+        /// <returns>False if the actor was not in the scene array</returns>
         public virtual bool RemoveActor(Actor actor)
         {
             // Create a variable to store if the removal was successful

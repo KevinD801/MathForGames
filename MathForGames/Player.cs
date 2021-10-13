@@ -49,7 +49,7 @@ namespace MathForGames
 
             if (keyPressed == ConsoleKey.W)
             {
-                moveDirection = new Vector2 { Y = 1 };
+                moveDirection = new Vector2 { Y = -1 };
             }
             if (keyPressed == ConsoleKey.A)
             {
@@ -57,21 +57,21 @@ namespace MathForGames
             }
             if (keyPressed == ConsoleKey.S)
             {
-                moveDirection = new Vector2 { X = -1 };
+                moveDirection = new Vector2 { Y = 1 };
             }
             if (keyPressed == ConsoleKey.D)
             {
                 moveDirection = new Vector2 { X = 1 };
             }
 
-            moveDirection.X *= Speed;
-            moveDirection.Y *= Speed;
-
             Velocity = moveDirection;
 
+            Position += Velocity;
+        }
 
-
-            Position = new Vector2 { X = Position.X + Velocity.X, Y = Position.Y + Velocity.Y };
+        public override void OnCollision(Actor actor)
+        {
+            Engine.CloseApplication();
         }
     }
 }
